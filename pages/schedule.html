@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>年間予定｜学校薬剤師支援サイト</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-top">
+    <a class="brand" href="../index.html">
+      <span class="mark">学校薬剤師支援サイト</span>
+      <span class="sub">SCHOOL PHARMACIST FIELD BINDER</span>
+    </a>
+    <div class="header-meta" id="today-label"></div>
+  </div>
+  <nav class="tabnav" aria-label="サイト内ナビゲーション">
+    <a href="../index.html">🏠 ホーム</a>
+    <a href="schedule.html" data-cat="schedule">📅 年間予定</a>
+    <a href="pool.html">🏊 プール水検査</a>
+    <a href="mite.html" data-cat="mite">🪳 ダニ検査</a>
+    <a href="kitchen.html" data-cat="kitchen">🍚 給食室検査</a>
+    <a href="air.html" data-cat="air">🌬 空気・騒音検査</a>
+    <a href="newsletter.html">📄 保健だより</a>
+    <a href="qa.html">❓ Q&amp;A</a>
+  </nav>
+</header>
+
+<div class="binder">
+  <div class="binder-holes"></div>
+  <main>
+
+    <section class="page-head">
+      <p class="eyebrow">ANNUAL SCHEDULE</p>
+      <h1>📅 年間予定</h1>
+      <p>学校薬剤師業務の標準的な年間サイクルです。学校ごとの実際の訪問予定は下の「担当校の予定」に追加して管理できます。</p>
+    </section>
+
+    <h2 class="section-title">標準的な年間サイクル</h2>
+    <div class="card" style="padding:24px 28px;">
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-month">4月</div><h4>学校訪問・環境衛生検査計画の確認</h4><p>年間の検査計画、設備の状況を確認します。</p></div>
+        <div class="tl-item"><div class="tl-month">5月〜6月</div><h4>プール前検査・プール水質検査</h4><p>プール開き前の設備点検と、プール使用期間中の水質検査を行います。</p></div>
+        <div class="tl-item"><div class="tl-month">6月〜7月</div><h4>教室環境検査（空気・照度・騒音）</h4><p>高温多湿になる時期の教室環境を確認します。</p></div>
+        <div class="tl-item"><div class="tl-month">9月</div><h4>ダニ検査</h4><p>夏を越えた教室・カーペットのダニアレルゲンを確認します。</p></div>
+        <div class="tl-item"><div class="tl-month">11月</div><h4>給食室検査</h4><p>冬場に向けた衛生管理・換気状況を確認します。</p></div>
+        <div class="tl-item"><div class="tl-month">1月〜2月</div><h4>教室環境検査（採光・照明・空気）</h4><p>暖房使用期の換気・CO₂濃度を中心に確認します。</p></div>
+        <div class="tl-item"><div class="tl-month">3月</div><h4>年度まとめ・次年度計画</h4><p>1年間の記録を振り返り、次年度の検査計画を立てます。</p></div>
+      </div>
+    </div>
+
+    <h2 class="section-title">担当校の予定</h2>
+    <form class="slip" id="schedule-form">
+      <div class="grid grid-3">
+        <div class="field">
+          <label for="s-date">予定日 <span class="req">*</span></label>
+          <input type="date" id="s-date" required>
+        </div>
+        <div class="field">
+          <label for="s-school">学校名 <span class="req">*</span></label>
+          <input type="text" id="s-school" required placeholder="例）〇〇小学校">
+        </div>
+        <div class="field">
+          <label for="s-type">内容</label>
+          <select id="s-type">
+            <option>プール水検査</option>
+            <option>ダニ検査</option>
+            <option>給食室検査</option>
+            <option>空気・騒音検査</option>
+            <option>学校訪問</option>
+            <option>その他</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="s-note">メモ</label>
+        <input type="text" id="s-note" placeholder="持ち物や連絡事項など">
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn-primary">＋ 予定を追加</button>
+        <span class="status-msg" id="status"></span>
+      </div>
+    </form>
+
+    <div class="table-wrap" style="margin-top:18px;">
+      <table class="records" id="records-table">
+        <caption>登録済みの予定（予定日が近い順）</caption>
+        <thead><tr><th>予定日</th><th>学校名</th><th>内容</th><th>メモ</th><th></th></tr></thead>
+        <tbody id="records-body"></tbody>
+      </table>
+      <p class="empty-note" id="empty-note" style="display:none;">まだ予定が登録されていません。上のフォームから追加してください。</p>
+    </div>
+
+  </main>
+</div>
+
+<footer class="site-footer">
+  <div class="binder">
+    <p>学校薬剤師支援サイト（個人運営・学習用プロジェクト）／記録データはお使いの端末内にのみ保存されます　&copy; <span class="footer-year"></span></p>
+  </div>
+</footer>
+
+<script src="../js/app.js"></script>
+<script src="../js/storage.js"></script>
+<script>
+const TYPE = "schedule";
+const form = document.getElementById("schedule-form");
+const statusEl = document.getElementById("status");
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const data = {
+    date: document.getElementById("s-date").value,
+    school: document.getElementById("s-school").value,
+    type: document.getElementById("s-type").value,
+    note: document.getElementById("s-note").value,
+  };
+  Storage.saveRecord(TYPE, data);
+  form.reset();
+  flashStatus(statusEl, "追加しました");
+  renderTable();
+});
+
+function sortedRecords(){
+  return Storage.getRecords(TYPE).slice().sort((a,b) => (a.date || "9999").localeCompare(b.date || "9999"));
+}
+
+function renderTable(){
+  const records = sortedRecords();
+  const body = document.getElementById("records-body");
+  const empty = document.getElementById("empty-note");
+  body.innerHTML = "";
+  empty.style.display = records.length ? "none" : "block";
+  const today = new Date().toISOString().slice(0,10);
+  records.forEach((r) => {
+    const tr = document.createElement("tr");
+    const upcoming = r.date >= today;
+    tr.innerHTML = `
+      <td>${r.date || ""} ${upcoming ? "🔸" : ""}</td>
+      <td>${r.school || ""}</td>
+      <td>${r.type || ""}</td>
+      <td>${r.note || ""}</td>
+      <td><button class="row-del" title="削除" data-id="${r.id}">✕</button></td>
+    `;
+    body.appendChild(tr);
+  });
+  body.querySelectorAll(".row-del").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      Storage.deleteRecord(TYPE, btn.dataset.id);
+      renderTable();
+    });
+  });
+}
+renderTable();
+</script>
+</body>
+</html>

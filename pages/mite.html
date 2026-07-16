@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ダニ検査｜学校薬剤師支援サイト</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-top">
+    <a class="brand" href="../index.html">
+      <span class="mark">学校薬剤師支援サイト</span>
+      <span class="sub">SCHOOL PHARMACIST FIELD BINDER</span>
+    </a>
+    <div class="header-meta" id="today-label"></div>
+  </div>
+  <nav class="tabnav" aria-label="サイト内ナビゲーション">
+    <a href="../index.html">🏠 ホーム</a>
+    <a href="schedule.html" data-cat="schedule">📅 年間予定</a>
+    <a href="pool.html">🏊 プール水検査</a>
+    <a href="mite.html" data-cat="mite">🪳 ダニ検査</a>
+    <a href="kitchen.html" data-cat="kitchen">🍚 給食室検査</a>
+    <a href="air.html" data-cat="air">🌬 空気・騒音検査</a>
+    <a href="newsletter.html">📄 保健だより</a>
+    <a href="qa.html">❓ Q&amp;A</a>
+  </nav>
+</header>
+
+<div class="binder">
+  <div class="binder-holes"></div>
+  <main>
+
+    <section class="page-head">
+      <p class="eyebrow">MITE / DUST ALLERGEN INSPECTION</p>
+      <h1>🪳 ダニ検査</h1>
+      <p>教室・保健室・図書室などの塵埃（じんあい）を採取し、ダニアレルゲン量や虫体数を確認します。梅雨明けの高温多湿な時期は特に注意が必要です。</p>
+    </section>
+
+    <h2 class="section-title">検査方法</h2>
+    <div class="card" style="padding:22px 26px;">
+      <ol class="steps">
+        <li><b>採取場所を決める</b> — 児童・生徒の在室時間が長い床・カーペット・座布団などを選びます。</li>
+        <li><b>採取面積を決める</b> — 一般的には1m²程度を目安にします。</li>
+        <li><b>掃除機で吸引</b> — 一定時間（目安1分程度）かけて塵埃を採取します。</li>
+        <li><b>検査キットまたは顕微鏡で判定</b> — アレルゲン検査キット、もしくは顕微鏡でダニ数を計数します。</li>
+        <li><b>判定・改善提案をまとめる</b> — 換気・清掃頻度・寝具管理などの改善提案を記録します。</li>
+      </ol>
+      <div class="criteria">
+        <b>目安となる基準値</b>：一般的にダニアレルゲン検査ではダニ数がおおむね<b>100匹／m²以下</b>であることが望ましいとされます。使用する検査キットや自治体の指針によって基準が異なる場合があるため、必ず採用キットの基準・学校保健安全法関連通知をあわせてご確認ください。
+      </div>
+    </div>
+
+    <h2 class="section-title">記録フォーム</h2>
+    <form class="slip" id="mite-form">
+      <div class="stamp">学校薬剤師<br>検査済</div>
+      <div class="grid grid-2">
+        <div class="field">
+          <label for="school">学校名 <span class="req">*</span></label>
+          <input type="text" id="school" required placeholder="例）〇〇市立〇〇小学校">
+        </div>
+        <div class="field">
+          <label for="pharmacist">担当薬剤師</label>
+          <input type="text" id="pharmacist" placeholder="氏名">
+        </div>
+        <div class="field">
+          <label for="date">採取日 <span class="req">*</span></label>
+          <input type="date" id="date" required>
+        </div>
+        <div class="field">
+          <label for="place">検査場所 <span class="req">*</span></label>
+          <input type="text" id="place" required placeholder="例）3年2組 教室後方カーペット">
+        </div>
+        <div class="field">
+          <label for="area">採取面積</label>
+          <div class="field-row"><input type="number" step="0.1" id="area" value="1"><span class="unit">m²</span></div>
+        </div>
+        <div class="field">
+          <label for="time">採取時間</label>
+          <div class="field-row"><input type="number" step="1" id="time" value="60"><span class="unit">秒</span></div>
+        </div>
+        <div class="field">
+          <label for="result">検査結果（ダニ数の目安）</label>
+          <div class="field-row"><input type="number" step="1" id="result"><span class="unit">匹／m²</span></div>
+        </div>
+        <div class="field">
+          <label for="judge">判定</label>
+          <select id="judge">
+            <option value="auto">検査結果から自動判定（100匹/m²基準）</option>
+            <option value="pass">適合（手動）</option>
+            <option value="fail">要改善（手動）</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="proposal">改善提案</label>
+        <textarea id="proposal" placeholder="例）換気回数を増やす／週2回の掃除機がけを徹底 など"></textarea>
+      </div>
+      <div class="field">
+        <label>写真添付</label>
+        <input type="file" accept="image/*" disabled>
+        <div style="font-size:.76rem;color:var(--ink-soft);margin-top:4px;">※ 写真の端末内保存は今後のアップデートで対応予定です。</div>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn-primary">💾 記録を保存</button>
+        <button type="button" class="btn-ghost" id="print-btn">🖨 この記録を印刷</button>
+        <span class="status-msg" id="status"></span>
+      </div>
+    </form>
+
+    <h2 class="section-title">保存済みの記録</h2>
+    <div class="table-wrap">
+      <table class="records" id="records-table">
+        <caption>この端末に保存されているダニ検査の記録</caption>
+        <thead>
+          <tr>
+            <th>採取日</th><th>学校名</th><th>場所</th><th class="num">面積</th><th class="num">ダニ数</th><th>判定</th><th>改善提案</th><th></th>
+          </tr>
+        </thead>
+        <tbody id="records-body"></tbody>
+      </table>
+      <p class="empty-note" id="empty-note" style="display:none;">まだ記録がありません。上のフォームから入力してください。</p>
+    </div>
+    <div class="form-actions" style="border-top:none;">
+      <button type="button" id="csv-btn">⬇ CSVで書き出す</button>
+    </div>
+
+  </main>
+</div>
+
+<footer class="site-footer">
+  <div class="binder">
+    <p>学校薬剤師支援サイト（個人運営・学習用プロジェクト）／記録データはお使いの端末内にのみ保存されます　&copy; <span class="footer-year"></span></p>
+  </div>
+</footer>
+
+<script src="../js/app.js"></script>
+<script src="../js/storage.js"></script>
+<script src="../js/csv.js"></script>
+<script>
+const TYPE = "mite";
+const form = document.getElementById("mite-form");
+const statusEl = document.getElementById("status");
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const result = parseFloat(document.getElementById("result").value);
+  const judgeSel = document.getElementById("judge").value;
+  let pass;
+  if (judgeSel === "pass") pass = true;
+  else if (judgeSel === "fail") pass = false;
+  else pass = !isNaN(result) ? result <= 100 : true;
+
+  const data = {
+    school: document.getElementById("school").value,
+    pharmacist: document.getElementById("pharmacist").value,
+    date: document.getElementById("date").value,
+    place: document.getElementById("place").value,
+    area: document.getElementById("area").value,
+    time: document.getElementById("time").value,
+    result: isNaN(result) ? "" : result,
+    proposal: document.getElementById("proposal").value,
+    pass,
+  };
+  Storage.saveRecord(TYPE, data);
+  form.reset();
+  document.getElementById("area").value = 1;
+  document.getElementById("time").value = 60;
+  flashStatus(statusEl, "保存しました");
+  renderTable();
+});
+
+document.getElementById("print-btn").addEventListener("click", () => window.print());
+
+document.getElementById("csv-btn").addEventListener("click", () => {
+  const cols = [
+    {key:"date", label:"採取日"}, {key:"school", label:"学校名"}, {key:"pharmacist", label:"担当薬剤師"},
+    {key:"place", label:"検査場所"}, {key:"area", label:"採取面積(m²)"}, {key:"time", label:"採取時間(秒)"},
+    {key:"result", label:"ダニ数(匹/m²)"}, {key:"proposal", label:"改善提案"},
+  ];
+  exportRecordsToCSV("ダニ検査記録.csv", cols, Storage.getRecords(TYPE));
+});
+
+function renderTable(){
+  const records = Storage.getRecords(TYPE);
+  const body = document.getElementById("records-body");
+  const empty = document.getElementById("empty-note");
+  body.innerHTML = "";
+  empty.style.display = records.length ? "none" : "block";
+  records.forEach((r) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${r.date || ""}</td>
+      <td>${r.school || ""}</td>
+      <td>${r.place || ""}</td>
+      <td class="num">${r.area ?? ""}</td>
+      <td class="num">${r.result ?? ""}</td>
+      <td>${badgeHTML(r.pass)}</td>
+      <td>${r.proposal || ""}</td>
+      <td><button class="row-del" title="削除" data-id="${r.id}">✕</button></td>
+    `;
+    body.appendChild(tr);
+  });
+  body.querySelectorAll(".row-del").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      Storage.deleteRecord(TYPE, btn.dataset.id);
+      renderTable();
+    });
+  });
+}
+renderTable();
+</script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>空気・騒音検査｜学校薬剤師支援サイト</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-top">
+    <a class="brand" href="../index.html">
+      <span class="mark">学校薬剤師支援サイト</span>
+      <span class="sub">SCHOOL PHARMACIST FIELD BINDER</span>
+    </a>
+    <div class="header-meta" id="today-label"></div>
+  </div>
+  <nav class="tabnav" aria-label="サイト内ナビゲーション">
+    <a href="../index.html">🏠 ホーム</a>
+    <a href="schedule.html" data-cat="schedule">📅 年間予定</a>
+    <a href="pool.html">🏊 プール水検査</a>
+    <a href="mite.html" data-cat="mite">🪳 ダニ検査</a>
+    <a href="kitchen.html" data-cat="kitchen">🍚 給食室検査</a>
+    <a href="air.html" data-cat="air">🌬 空気・騒音検査</a>
+    <a href="newsletter.html">📄 保健だより</a>
+    <a href="qa.html">❓ Q&amp;A</a>
+  </nav>
+</header>
+
+<div class="binder">
+  <div class="binder-holes"></div>
+  <main>
+
+    <section class="page-head">
+      <p class="eyebrow">CLASSROOM AIR / NOISE INSPECTION</p>
+      <h1>🌬 空気・騒音検査</h1>
+      <p>教室のCO₂濃度・温湿度・騒音・照度・黒板の見え方を確認し、学習環境として適切かどうかを判定します。</p>
+    </section>
+
+    <h2 class="section-title">検査方法</h2>
+    <div class="card" style="padding:22px 26px;">
+      <ol class="steps">
+        <li><b>対象教室を決める</b> — 授業中または休み時間直後の教室を選びます。</li>
+        <li><b>CO₂濃度を測定</b> — CO₂測定器で教室中央付近の空気を測定します。</li>
+        <li><b>温湿度を測定</b> — 温湿度計で測定します。</li>
+        <li><b>騒音レベルを測定</b> — 騒音計で窓の開閉状態を記録しながら測定します。</li>
+        <li><b>照度・黒板面を確認</b> — 照度計で机上面・黒板面を測定し、反射によるまぶしさの有無を確認します。</li>
+        <li><b>記録して判定</b> — 教室番号とあわせて記録します。</li>
+      </ol>
+      <div class="criteria">
+        <b>目安となる基準値</b>：CO₂濃度<b>1500ppm以下</b>／温度<b>17〜28℃</b>／湿度<b>30〜80%</b>／騒音は窓を閉じた状態でおおむね<b>50dB以下</b>／教室の照度<b>300lx以上</b>・黒板面は<b>500lx以上</b>で反射によるまぶしさがないこと。基準は改定されることがあるため、必ず最新の学校環境衛生基準でご確認ください。
+      </div>
+    </div>
+
+    <h2 class="section-title">記録フォーム</h2>
+    <form class="slip" id="air-form">
+      <div class="stamp">学校薬剤師<br>検査済</div>
+      <div class="grid grid-2">
+        <div class="field">
+          <label for="school">学校名 <span class="req">*</span></label>
+          <input type="text" id="school" required placeholder="例）〇〇市立〇〇小学校">
+        </div>
+        <div class="field">
+          <label for="pharmacist">担当薬剤師</label>
+          <input type="text" id="pharmacist" placeholder="氏名">
+        </div>
+        <div class="field">
+          <label for="date">検査日 <span class="req">*</span></label>
+          <input type="date" id="date" required>
+        </div>
+        <div class="field">
+          <label for="room">教室番号 <span class="req">*</span></label>
+          <input type="text" id="room" required placeholder="例）3年2組">
+        </div>
+        <div class="field">
+          <label for="co2">CO₂濃度</label>
+          <div class="field-row"><input type="number" step="1" id="co2"><span class="unit">ppm</span></div>
+        </div>
+        <div class="field">
+          <label for="temp">温度</label>
+          <div class="field-row"><input type="number" step="0.1" id="temp"><span class="unit">℃</span></div>
+        </div>
+        <div class="field">
+          <label for="humidity">湿度</label>
+          <div class="field-row"><input type="number" step="1" id="humidity"><span class="unit">%</span></div>
+        </div>
+        <div class="field">
+          <label for="noise">騒音</label>
+          <div class="field-row"><input type="number" step="0.1" id="noise"><span class="unit">dB</span></div>
+        </div>
+        <div class="field">
+          <label for="lux">照度（机上面）</label>
+          <div class="field-row"><input type="number" step="1" id="lux"><span class="unit">lx</span></div>
+        </div>
+        <div class="field">
+          <label for="reflection">黒板の反射</label>
+          <select id="reflection">
+            <option value="まぶしさなし">まぶしさなし</option>
+            <option value="ややまぶしい">ややまぶしい</option>
+            <option value="まぶしく見えにくい">まぶしく見えにくい</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="note">特記事項</label>
+        <textarea id="note" placeholder="気づいた点・改善提案など"></textarea>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn-primary">💾 記録を保存</button>
+        <button type="button" class="btn-ghost" id="print-btn">🖨 この記録を印刷</button>
+        <span class="status-msg" id="status"></span>
+      </div>
+    </form>
+
+    <h2 class="section-title">保存済みの記録</h2>
+    <div class="table-wrap">
+      <table class="records" id="records-table">
+        <caption>この端末に保存されている空気・騒音検査の記録</caption>
+        <thead>
+          <tr>
+            <th>検査日</th><th>教室</th><th class="num">CO₂</th><th class="num">騒音</th><th class="num">照度</th><th>判定</th><th>特記事項</th><th></th>
+          </tr>
+        </thead>
+        <tbody id="records-body"></tbody>
+      </table>
+      <p class="empty-note" id="empty-note" style="display:none;">まだ記録がありません。上のフォームから入力してください。</p>
+    </div>
+    <div class="form-actions" style="border-top:none;">
+      <button type="button" id="csv-btn">⬇ CSVで書き出す</button>
+    </div>
+
+  </main>
+</div>
+
+<footer class="site-footer">
+  <div class="binder">
+    <p>学校薬剤師支援サイト（個人運営・学習用プロジェクト）／記録データはお使いの端末内にのみ保存されます　&copy; <span class="footer-year"></span></p>
+  </div>
+</footer>
+
+<script src="../js/app.js"></script>
+<script src="../js/storage.js"></script>
+<script src="../js/csv.js"></script>
+<script>
+const TYPE = "air";
+const form = document.getElementById("air-form");
+const statusEl = document.getElementById("status");
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const co2 = parseFloat(document.getElementById("co2").value);
+  const temp = parseFloat(document.getElementById("temp").value);
+  const humidity = parseFloat(document.getElementById("humidity").value);
+  const noise = parseFloat(document.getElementById("noise").value);
+  const lux = parseFloat(document.getElementById("lux").value);
+  const reflection = document.getElementById("reflection").value;
+
+  const pass =
+    (isNaN(co2) || co2 <= 1500) &&
+    (isNaN(temp) || (temp >= 17 && temp <= 28)) &&
+    (isNaN(humidity) || (humidity >= 30 && humidity <= 80)) &&
+    (isNaN(noise) || noise <= 50) &&
+    (isNaN(lux) || lux >= 300) &&
+    reflection === "まぶしさなし";
+
+  const data = {
+    school: document.getElementById("school").value,
+    pharmacist: document.getElementById("pharmacist").value,
+    date: document.getElementById("date").value,
+    room: document.getElementById("room").value,
+    co2: isNaN(co2) ? "" : co2,
+    temp: isNaN(temp) ? "" : temp,
+    humidity: isNaN(humidity) ? "" : humidity,
+    noise: isNaN(noise) ? "" : noise,
+    lux: isNaN(lux) ? "" : lux,
+    reflection,
+    note: document.getElementById("note").value,
+    pass,
+  };
+  Storage.saveRecord(TYPE, data);
+  form.reset();
+  flashStatus(statusEl, "保存しました");
+  renderTable();
+});
+
+document.getElementById("print-btn").addEventListener("click", () => window.print());
+
+document.getElementById("csv-btn").addEventListener("click", () => {
+  const cols = [
+    {key:"date", label:"検査日"}, {key:"school", label:"学校名"}, {key:"pharmacist", label:"担当薬剤師"}, {key:"room", label:"教室番号"},
+    {key:"co2", label:"CO2(ppm)"}, {key:"temp", label:"温度(℃)"}, {key:"humidity", label:"湿度(%)"},
+    {key:"noise", label:"騒音(dB)"}, {key:"lux", label:"照度(lx)"}, {key:"reflection", label:"黒板の反射"}, {key:"note", label:"特記事項"},
+  ];
+  exportRecordsToCSV("空気騒音検査記録.csv", cols, Storage.getRecords(TYPE));
+});
+
+function renderTable(){
+  const records = Storage.getRecords(TYPE);
+  const body = document.getElementById("records-body");
+  const empty = document.getElementById("empty-note");
+  body.innerHTML = "";
+  empty.style.display = records.length ? "none" : "block";
+  records.forEach((r) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${r.date || ""}</td>
+      <td>${r.room || ""}</td>
+      <td class="num">${r.co2 ?? ""}</td>
+      <td class="num">${r.noise ?? ""}</td>
+      <td class="num">${r.lux ?? ""}</td>
+      <td>${badgeHTML(r.pass)}</td>
+      <td>${r.note || ""}</td>
+      <td><button class="row-del" title="削除" data-id="${r.id}">✕</button></td>
+    `;
+    body.appendChild(tr);
+  });
+  body.querySelectorAll(".row-del").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      Storage.deleteRecord(TYPE, btn.dataset.id);
+      renderTable();
+    });
+  });
+}
+renderTable();
+</script>
+</body>
+</html>

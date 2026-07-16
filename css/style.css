@@ -1,0 +1,507 @@
+/* ==========================================================================
+   学校薬剤師支援サイト — スタイルシート
+   コンセプト: 「現場検査帳票（フィールドバインダー）」
+   実際の検査現場で使う紙のバインダー・帳票を思わせる質感。
+   タブ区切りのナビゲーション、パンチ穴、朱色の検印スタンプが特徴。
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap');
+
+:root{
+  /* ---- カラートークン ---- */
+  --paper:        #ece8dd;   /* 帳票用紙のベース */
+  --paper-deep:    #e2ddcd;  /* タブ・枠の背景 */
+  --card:         #fbf9f3;   /* 個々の帳票カード */
+  --ink:          #23291f;   /* 本文の黒に近いインク色 */
+  --ink-soft:     #5a5d4f;   /* 補足テキスト */
+  --line:         #c7c0aa;   /* 罫線・パンチ穴・枠線 */
+  --line-soft:    #d9d3c1;
+  --green:        #2f6b4f;   /* 薬剤師/衛生を象徴するメイングリーン */
+  --green-deep:   #1c4632;
+  --green-pale:   #dbe8de;
+  --stamp:        #a6332b;   /* 検印(判子)の朱色 — 注意/ステータス用 */
+  --stamp-pale:   #f3ddd9;
+  --gold:         #a6812f;   /* 補助アクセント(年間予定などに使用) */
+
+  --font-display: 'Shippori Mincho', serif;
+  --font-body: 'Zen Kaku Gothic New', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --radius: 3px;
+  --shadow-card: 0 1px 0 rgba(35,41,31,0.06), 0 6px 16px -10px rgba(35,41,31,0.35);
+}
+
+*{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; }
+
+body{
+  margin:0;
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(47,107,79,0.06), transparent 60%),
+    var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+a{ color: var(--green-deep); }
+img{ max-width: 100%; }
+
+:focus-visible{
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* ==========================================================================
+   バインダー穴（左マージンの装飾） — サイト全体の「紙の帳票」感の署名要素
+   ========================================================================== */
+.binder{
+  position: relative;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding-left: 34px;
+}
+.binder-holes{
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 34px;
+  display: none;
+}
+@media (min-width: 900px){
+  .binder-holes{ display: block; }
+  .binder-holes::before{
+    content: "";
+    position: absolute;
+    left: 15px; top: 0; bottom: 0;
+    width: 1px;
+    background: repeating-linear-gradient(to bottom, transparent 0 8px, var(--line) 8px 9px);
+    opacity: .5;
+  }
+}
+.binder-holes span{
+  position: absolute;
+  left: 8px;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff, var(--paper-deep) 60%, var(--line) 100%);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.25);
+}
+
+/* ==========================================================================
+   ヘッダー / タブナビゲーション（バインダーの背表紙タブを模したメニュー）
+   ========================================================================== */
+.site-header{
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(180deg, var(--paper-deep), var(--paper));
+}
+.header-top{
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 22px 20px 10px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.brand{
+  display:flex;
+  align-items:baseline;
+  gap:10px;
+  text-decoration:none;
+  color:var(--ink);
+}
+.brand .mark{
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--green-deep);
+  letter-spacing: .04em;
+}
+.brand .sub{
+  font-size: .74rem;
+  color: var(--ink-soft);
+  letter-spacing: .12em;
+  font-family: var(--font-mono);
+}
+.header-meta{
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  color: var(--ink-soft);
+  text-align:right;
+}
+
+.tabnav{
+  max-width: 1040px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 0 14px;
+}
+.tabnav a{
+  --tab-c: var(--green);
+  position: relative;
+  text-decoration: none;
+  color: var(--ink);
+  font-size: .86rem;
+  font-weight: 500;
+  padding: 9px 14px 10px;
+  border: 1px solid var(--line);
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+  background: var(--paper-deep);
+  white-space: nowrap;
+}
+.tabnav a:hover{ background: var(--card); }
+.tabnav a.active{
+  background: var(--card);
+  color: var(--green-deep);
+  font-weight: 700;
+  box-shadow: inset 0 3px 0 var(--tab-c);
+}
+.tabnav a[data-cat="mite"]{ --tab-c:#7a5a2c; }
+.tabnav a[data-cat="kitchen"]{ --tab-c:#a6332b; }
+.tabnav a[data-cat="air"]{ --tab-c:#375d8a; }
+.tabnav a[data-cat="schedule"]{ --tab-c:#a6812f; }
+
+/* ==========================================================================
+   共通レイアウト
+   ========================================================================== */
+main{ max-width: 1040px; margin: 0 auto; padding: 30px 20px 90px; }
+
+.page-head{ margin-bottom: 26px; }
+.eyebrow{
+  font-family: var(--font-mono);
+  font-size: .74rem;
+  letter-spacing: .14em;
+  color: var(--green-deep);
+  text-transform: uppercase;
+  display:flex;
+  align-items:center;
+  gap: 8px;
+}
+.eyebrow::before{
+  content:"";
+  width:16px; height:1px; background: var(--green);
+}
+.page-head h1{
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.3rem);
+  margin: 6px 0 8px;
+  color: var(--ink);
+}
+.page-head p{ color: var(--ink-soft); max-width: 62ch; margin:0; }
+
+.section-title{
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  margin: 40px 0 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+  color: var(--green-deep);
+}
+
+/* ==========================================================================
+   カード（帳票用紙）
+   ========================================================================== */
+.card{
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+}
+
+.grid{
+  display:grid;
+  gap: 14px;
+}
+.grid-2{ grid-template-columns: repeat(2, 1fr); }
+.grid-3{ grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 720px){
+  .grid-2, .grid-3{ grid-template-columns: 1fr; }
+}
+
+/* ホームのメニューカード */
+.menu-card{
+  display:block;
+  padding: 20px;
+  text-decoration:none;
+  color: var(--ink);
+  position: relative;
+  overflow:hidden;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.menu-card:hover{ transform: translateY(-2px); box-shadow: 0 10px 22px -12px rgba(35,41,31,.4); }
+.menu-card .tag{
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  color: var(--green-deep);
+  letter-spacing: .1em;
+}
+.menu-card h3{
+  font-family: var(--font-display);
+  margin: 6px 0 4px;
+  font-size: 1.15rem;
+}
+.menu-card p{ margin:0; font-size:.86rem; color: var(--ink-soft); }
+.menu-card .icon{
+  position:absolute; right: 14px; top: 14px;
+  font-size: 1.6rem; opacity:.5;
+}
+
+/* ==========================================================================
+   検査票フォーム（署名要素: 実際の紙の検査票を模したフォーム）
+   ========================================================================== */
+.slip{
+  background:
+    linear-gradient(var(--card), var(--card)) padding-box,
+    repeating-linear-gradient(0deg, transparent 0 27px, var(--line-soft) 27px 28px) content-box;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  padding: 26px 26px 26px 40px;
+  position: relative;
+}
+.slip::before{
+  content:"";
+  position:absolute; left:16px; top:0; bottom:0; width:1px;
+  background: var(--line);
+  opacity:.6;
+}
+.slip .stamp{
+  position:absolute;
+  top: 18px; right: 22px;
+  width: 64px; height: 64px;
+  border: 2.5px solid var(--stamp);
+  border-radius: 50%;
+  color: var(--stamp);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: .78rem;
+  display:flex; align-items:center; justify-content:center;
+  text-align:center;
+  transform: rotate(-8deg);
+  opacity: .85;
+  pointer-events:none;
+}
+
+.field{ margin-bottom: 16px; }
+.field label{
+  display:block;
+  font-size: .78rem;
+  color: var(--ink-soft);
+  margin-bottom: 5px;
+  font-family: var(--font-mono);
+  letter-spacing: .02em;
+}
+.field .req{ color: var(--stamp); }
+.field input[type="text"],
+.field input[type="date"],
+.field input[type="number"],
+.field input[type="time"],
+.field select,
+.field textarea{
+  width: 100%;
+  padding: 9px 10px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: #fff;
+  font: inherit;
+  color: var(--ink);
+}
+.field textarea{ min-height: 84px; resize: vertical; }
+.field .unit{ font-family: var(--font-mono); font-size:.78rem; color:var(--ink-soft); margin-left:6px; }
+.field-row{ display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+
+.checks{ display:flex; flex-wrap:wrap; gap: 10px 18px; }
+.checks label{
+  display:flex; align-items:center; gap:6px;
+  font-size:.88rem; color: var(--ink);
+}
+
+.form-actions{
+  display:flex; gap:10px; flex-wrap:wrap;
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px dashed var(--line);
+}
+
+button, .btn{
+  font: inherit;
+  cursor:pointer;
+  border-radius: 4px;
+  border: 1px solid var(--line);
+  background: var(--paper-deep);
+  color: var(--ink);
+  padding: 10px 16px;
+  font-size: .86rem;
+  font-weight:600;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+button:hover, .btn:hover{ background: var(--card); }
+.btn-primary{
+  background: var(--green-deep);
+  border-color: var(--green-deep);
+  color: #fff;
+}
+.btn-primary:hover{ background: var(--green); }
+.btn-ghost{ background: transparent; }
+.btn-danger{ color: var(--stamp); border-color: var(--stamp-pale); }
+.btn-danger:hover{ background: var(--stamp-pale); }
+
+.status-msg{
+  font-size:.82rem; font-family: var(--font-mono);
+  padding: 8px 10px; border-radius:4px;
+  display:none;
+}
+.status-msg.show{ display:inline-block; }
+.status-msg.ok{ background: var(--green-pale); color: var(--green-deep); }
+
+/* ==========================================================================
+   保存済み記録一覧（テーブル）
+   ========================================================================== */
+.table-wrap{ overflow-x:auto; }
+table.records{
+  width:100%;
+  border-collapse: collapse;
+  font-size: .84rem;
+  background: var(--card);
+}
+table.records caption{ text-align:left; font-family:var(--font-mono); font-size:.76rem; color:var(--ink-soft); margin-bottom:6px; }
+table.records th, table.records td{
+  border: 1px solid var(--line-soft);
+  padding: 7px 9px;
+  text-align:left;
+  white-space:nowrap;
+}
+table.records th{
+  background: var(--paper-deep);
+  font-weight:700;
+  font-family: var(--font-mono);
+  font-size:.72rem;
+  color: var(--ink-soft);
+}
+table.records td.num{ font-family: var(--font-mono); text-align:right; }
+.badge{
+  display:inline-block;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size:.72rem;
+  font-weight:700;
+}
+.badge.pass{ background: var(--green-pale); color: var(--green-deep); }
+.badge.fail{ background: var(--stamp-pale); color: var(--stamp); }
+.row-del{ background:transparent; border:none; color:var(--ink-soft); cursor:pointer; font-size:.9rem; padding:2px 6px; }
+.row-del:hover{ color: var(--stamp); }
+.empty-note{ color: var(--ink-soft); font-size:.86rem; padding: 14px 0; }
+
+/* ==========================================================================
+   検査手順(手順ステップ)
+   ========================================================================== */
+.steps{ list-style:none; margin:0; padding:0; counter-reset: step; }
+.steps li{
+  counter-increment: step;
+  position:relative;
+  padding: 12px 0 12px 40px;
+  border-bottom: 1px dashed var(--line);
+}
+.steps li:last-child{ border-bottom:none; }
+.steps li::before{
+  content: counter(step);
+  position:absolute; left:0; top:10px;
+  width: 26px; height:26px;
+  border-radius:50%;
+  background: var(--green-deep);
+  color:#fff;
+  font-family:var(--font-mono); font-size:.78rem; font-weight:700;
+  display:flex; align-items:center; justify-content:center;
+}
+.steps li b{ color: var(--green-deep); }
+
+.criteria{
+  background: var(--green-pale);
+  border-left: 3px solid var(--green);
+  padding: 12px 16px;
+  border-radius: 0 4px 4px 0;
+  font-size:.9rem;
+  margin: 14px 0;
+}
+.criteria b{ color: var(--green-deep); }
+
+/* ==========================================================================
+   年間予定（タイムライン）
+   ========================================================================== */
+.timeline{ position:relative; padding-left: 26px; }
+.timeline::before{
+  content:""; position:absolute; left:8px; top:6px; bottom:6px; width:2px;
+  background: var(--line);
+}
+.tl-item{ position:relative; padding-bottom: 26px; }
+.tl-item::before{
+  content:"";
+  position:absolute; left:-26px; top:4px;
+  width:16px; height:16px; border-radius:50%;
+  background: var(--card); border:3px solid var(--gold);
+}
+.tl-month{
+  font-family: var(--font-mono);
+  font-size:.72rem; color: var(--gold); letter-spacing:.1em;
+}
+.tl-item h4{ margin:2px 0 4px; font-family: var(--font-display); }
+.tl-item p{ margin:0; color: var(--ink-soft); font-size:.88rem; }
+
+/* ==========================================================================
+   保健だより / Q&A
+   ========================================================================== */
+.newsletter-list{ list-style:none; margin:0; padding:0; display:grid; gap:10px; }
+.newsletter-list li{
+  background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+  padding: 14px 16px; display:flex; justify-content:space-between; gap:10px; align-items:center;
+}
+.newsletter-list .meta{ font-family:var(--font-mono); font-size:.72rem; color:var(--ink-soft); }
+
+.qa-search{
+  display:flex; gap:8px; margin-bottom: 22px;
+}
+.qa-search input{
+  flex:1; padding: 11px 14px; border:1px solid var(--line); border-radius:4px; font:inherit;
+}
+.qa-item{
+  border:1px solid var(--line); border-radius:var(--radius); background:var(--card);
+  margin-bottom:8px; overflow:hidden;
+}
+.qa-item summary{
+  cursor:pointer; padding: 13px 16px; font-weight:700; list-style:none;
+  display:flex; align-items:center; gap:10px;
+}
+.qa-item summary::-webkit-details-marker{ display:none; }
+.qa-item summary::before{ content:"Q"; color:#fff; background:var(--green-deep); width:22px; height:22px; border-radius:50%; font-family:var(--font-mono); font-size:.72rem; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.qa-item .a{ padding: 0 16px 16px 48px; color: var(--ink-soft); font-size:.92rem; }
+.qa-cat{ font-family:var(--font-mono); font-size:.68rem; color:var(--green-deep); background:var(--green-pale); padding:2px 8px; border-radius:20px; margin-left:auto; }
+
+/* ==========================================================================
+   フッター
+   ========================================================================== */
+.site-footer{
+  border-top: 1px solid var(--line);
+  padding: 26px 20px 60px;
+  text-align:center;
+  color: var(--ink-soft);
+  font-size:.78rem;
+}
+
+/* 印刷時 */
+@media print{
+  .site-header, .tabnav, .form-actions, .site-footer, .binder-holes{ display:none !important; }
+  body{ background:#fff; }
+  .slip{ box-shadow:none; border-color:#999; }
+}

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>学校薬剤師支援サイト｜検査帳票・記録・保健だより</title>
+<meta name="description" content="学校薬剤師の日常業務を支える検査記録帳票サイト。プール水・ダニ・給食室・空気/騒音検査の手順と記録フォーム、年間予定、保健だより、Q&Aをまとめています。">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-top">
+    <a class="brand" href="index.html">
+      <span class="mark">学校薬剤師支援サイト</span>
+      <span class="sub">SCHOOL PHARMACIST FIELD BINDER</span>
+    </a>
+    <div class="header-meta" id="today-label"></div>
+  </div>
+  <nav class="tabnav" aria-label="サイト内ナビゲーション">
+    <a href="index.html">🏠 ホーム</a>
+    <a href="pages/schedule.html" data-cat="schedule">📅 年間予定</a>
+    <a href="pages/pool.html">🏊 プール水検査</a>
+    <a href="pages/mite.html" data-cat="mite">🪳 ダニ検査</a>
+    <a href="pages/kitchen.html" data-cat="kitchen">🍚 給食室検査</a>
+    <a href="pages/air.html" data-cat="air">🌬 空気・騒音検査</a>
+    <a href="pages/newsletter.html">📄 保健だより</a>
+    <a href="pages/qa.html">❓ Q&amp;A</a>
+  </nav>
+</header>
+
+<div class="binder">
+  <div class="binder-holes"></div>
+  <main>
+
+    <section class="page-head">
+      <p class="eyebrow">FIELD BINDER / HOME</p>
+      <h1>現場の検査を、そのまま記録に。</h1>
+      <p>学校環境衛生検査の手順確認から、記録フォームの入力、CSV書き出しまで一つのサイトで完結します。スマートフォンでもパソコンでも、同じ内容を確認・入力できます。</p>
+    </section>
+
+    <div class="grid grid-3">
+      <a class="menu-card card" href="pages/schedule.html">
+        <span class="icon">📅</span>
+        <span class="tag">SCHEDULE</span>
+        <h3>年間予定</h3>
+        <p>検査の年間スケジュールと、次に控えている予定を確認できます。</p>
+      </a>
+      <a class="menu-card card" href="pages/pool.html">
+        <span class="icon">🏊</span>
+        <span class="tag">POOL WATER</span>
+        <h3>プール水検査</h3>
+        <p>遊離残留塩素・pH・濁度などの検査手順と記録フォーム。</p>
+      </a>
+      <a class="menu-card card" href="pages/mite.html">
+        <span class="icon">🪳</span>
+        <span class="tag">MITE / DUST</span>
+        <h3>ダニ検査</h3>
+        <p>教室のダニアレルゲン検査の手順と、判定・改善提案の記録。</p>
+      </a>
+      <a class="menu-card card" href="pages/kitchen.html">
+        <span class="icon">🍚</span>
+        <span class="tag">SCHOOL KITCHEN</span>
+        <h3>給食室検査</h3>
+        <p>照度・温湿度・換気・衛生管理のチェックリストと記録。</p>
+      </a>
+      <a class="menu-card card" href="pages/air.html">
+        <span class="icon">🌬</span>
+        <span class="tag">AIR / NOISE</span>
+        <h3>空気・騒音検査</h3>
+        <p>CO₂濃度・温湿度・騒音・照度・黒板反射などの教室環境検査。</p>
+      </a>
+      <a class="menu-card card" href="pages/newsletter.html">
+        <span class="icon">📄</span>
+        <span class="tag">NEWSLETTER</span>
+        <h3>保健だより</h3>
+        <p>季節ごとの保健だより・啓発資料をまとめて掲載します。</p>
+      </a>
+    </div>
+
+    <h2 class="section-title">次回予定</h2>
+    <div class="card" style="padding:20px;">
+      <div class="tl-month" style="margin-bottom:4px;">直近のスケジュール</div>
+      <div id="next-event-box" style="color:var(--ink-soft);font-size:.92rem;">
+        年間予定ページで、学校名や検査日を編集できます（<a href="pages/schedule.html">年間予定はこちら</a>）。
+      </div>
+    </div>
+
+    <h2 class="section-title">❓ よくある質問</h2>
+    <div class="card" style="padding:18px 20px;">
+      <p style="margin:0;color:var(--ink-soft);font-size:.92rem;">検査値の基準や記録の付け方について迷ったら、<a href="pages/qa.html">Q&amp;Aページ</a>で検索できます。日々の勉強会で出た疑問も、随時追加していく予定です。</p>
+    </div>
+
+  </main>
+</div>
+
+<footer class="site-footer">
+  <div class="binder">
+    <p>学校薬剤師支援サイト（個人運営・学習用プロジェクト）／記録データはお使いの端末内にのみ保存されます　&copy; <span class="footer-year"></span></p>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+<script src="js/storage.js"></script>
+<script>
+(function () {
+  const box = document.getElementById("next-event-box");
+  const today = new Date().toISOString().slice(0, 10);
+  const upcoming = Storage.getRecords("schedule")
+    .filter((r) => r.date && r.date >= today)
+    .sort((a, b) => a.date.localeCompare(b.date));
+  if (upcoming.length) {
+    const r = upcoming[0];
+    box.innerHTML = `
+      <div style="font-family:var(--font-mono);color:var(--gold);font-size:1.4rem;font-weight:700;">${r.date}</div>
+      <div style="font-family:var(--font-display);font-size:1.1rem;margin:2px 0;">${r.school || ""}</div>
+      <div>${r.type || ""}${r.note ? " ／ " + r.note : ""}</div>
+      <p style="margin-top:8px;"><a href="pages/schedule.html">すべての予定を見る →</a></p>
+    `;
+  }
+})();
+</script>
+</body>
+</html>
