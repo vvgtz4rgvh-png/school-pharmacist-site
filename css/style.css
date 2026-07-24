@@ -166,6 +166,7 @@ img{ max-width: 100%; }
   box-shadow: inset 0 3px 0 var(--tab-c);
 }
 .tabnav a[data-cat="mite"]{ --tab-c:#7a5a2c; }
+.tabnav a[data-cat="legal"]{ --tab-c:#4a3a7a; }
 .tabnav a[data-cat="kitchen"]{ --tab-c:#a6332b; }
 .tabnav a[data-cat="air"]{ --tab-c:#375d8a; }
 .tabnav a[data-cat="schedule"]{ --tab-c:#a6812f; }
