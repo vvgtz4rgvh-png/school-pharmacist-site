@@ -461,6 +461,20 @@ table.records td.num{ font-family: var(--font-mono); text-align:right; }
 }
 .tl-item h4{ margin:2px 0 4px; font-family: var(--font-display); }
 .tl-item p{ margin:0; color: var(--ink-soft); font-size:.88rem; }
+.tl-item ul.tl-sublist{ list-style:none; margin:8px 0 0; padding:0; }
+.tl-item ul.tl-sublist li{
+  position:relative;
+  padding-left:14px;
+  margin-top:6px;
+  font-size:.86rem;
+  color: var(--ink-soft);
+  line-height:1.5;
+}
+.tl-item ul.tl-sublist li::before{
+  content:"–";
+  position:absolute; left:0;
+  color: var(--gold);
+}
 
 /* ==========================================================================
    保健だより / Q&A
