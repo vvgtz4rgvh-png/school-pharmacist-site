@@ -369,64 +369,6 @@ button:hover, .btn:hover{ background: var(--card); }
 .status-msg.ok{ background: var(--green-pale); color: var(--green-deep); }
 
 /* ==========================================================================
-   年間スケジュール：月別グリッド（12カラムの一覧表）
-   ========================================================================== */
-table.year-grid{
-  border-collapse: collapse;
-  width: 100%;
-  min-width: 1080px;
-  table-layout: fixed;
-  background: var(--card);
-}
-table.year-grid th, table.year-grid td{
-  border: 1px solid var(--line-soft);
-  padding: 9px 8px;
-  vertical-align: top;
-  width: 90px;
-  font-size: .8rem;
-}
-table.year-grid thead th{
-  text-align: center;
-  font-family: var(--font-mono);
-  font-size: .84rem;
-  font-weight: 700;
-  padding: 10px 4px;
-}
-table.year-grid .term-sub{
-  display:block;
-  font-family: var(--font-body);
-  font-size: .66rem;
-  font-weight: 400;
-  margin-top: 2px;
-}
-table.year-grid td ul{ margin: 0; padding-left: 14px; }
-table.year-grid td ul li{ margin-bottom: 7px; line-height: 1.35; }
-table.year-grid td ul li:last-child{ margin-bottom: 0; }
-.term-note{
-  margin: 4px 0 0;
-  color: var(--ink-soft);
-  font-size: .74rem;
-  text-align: center;
-}
-
-.term-1{ background: var(--green-pale); color: var(--green-deep); }
-.term-2{ background: #e6eef5; color: #1d4066; }
-.term-3{ background: #faf1de; color: #7a5a2c; }
-.term-break{ background: #f7ecd2; color: #7a5a2c; }
-
-.dot{
-  display:inline-block;
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  margin-right: 5px;
-  vertical-align: middle;
-}
-.dot.cat-env{ background: var(--green); }
-.dot.cat-committee{ background: #4a3a7a; }
-.dot.cat-edu{ background: var(--stamp); }
-.dot.cat-admin{ background: var(--ink-soft); }
-
-/* ==========================================================================
    保存済み記録一覧（テーブル）
    ========================================================================== */
 .table-wrap{ overflow-x:auto; }
@@ -461,10 +403,6 @@ table.records td.num{ font-family: var(--font-mono); text-align:right; }
 }
 .badge.pass{ background: var(--green-pale); color: var(--green-deep); }
 .badge.fail{ background: var(--stamp-pale); color: var(--stamp); }
-.badge.cat-env{ background: var(--green-pale); color: var(--green-deep); }
-.badge.cat-committee{ background: #e8e4f5; color: #4a3a7a; }
-.badge.cat-edu{ background: var(--stamp-pale); color: var(--stamp); }
-.badge.cat-admin{ background: var(--paper-deep); color: var(--ink-soft); }
 .row-del{ background:transparent; border:none; color:var(--ink-soft); cursor:pointer; font-size:.9rem; padding:2px 6px; }
 .row-del:hover{ color: var(--stamp); }
 .empty-note{ color: var(--ink-soft); font-size:.86rem; padding: 14px 0; }
