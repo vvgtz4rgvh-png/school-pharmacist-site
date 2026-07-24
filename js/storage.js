@@ -44,5 +44,21 @@ const Storage = (() => {
     localStorage.removeItem(keyOf(type));
   }
 
-  return { getRecords, saveRecord, deleteRecord, clearAll };
+  /** この端末でのlocalStorage使用量の目安を計算する（写真添付が容量を増やす主因） */
+  function estimateUsage() {
+    let total = 0;
+    for (const key in localStorage) {
+      if (Object.prototype.hasOwnProperty.call(localStorage, key)) {
+        total += (localStorage[key].length + key.length) * 2; // UTF-16換算の概算
+      }
+    }
+    const LIMIT_BYTES = 5 * 1024 * 1024; // ブラウザごとに異なるが5MBを目安に警告
+    return {
+      bytes: total,
+      mb: total / (1024 * 1024),
+      percent: Math.min(100, (total / LIMIT_BYTES) * 100),
+    };
+  }
+
+  return { getRecords, saveRecord, deleteRecord, clearAll, estimateUsage };
 })();

@@ -59,6 +59,19 @@ function badgeHTML(pass) {
     : `<span class="badge fail">要改善</span>`;
 }
 
+/** 保存容量の目安メーターを描画する（写真添付ページなどで使用） */
+function renderStorageMeter(elId) {
+  const el = document.getElementById(elId);
+  if (!el || typeof Storage === "undefined" || !Storage.estimateUsage) return;
+  const u = Storage.estimateUsage();
+  el.classList.toggle("warn", u.percent > 70);
+  el.innerHTML = `
+    この端末の保存容量の目安：約${u.mb.toFixed(2)}MB
+    <span class="bar"><span style="width:${Math.max(3, u.percent)}%"></span></span>
+    ${u.percent > 70 ? "（残り容量が少なくなっています。CSV書き出しでバックアップしてください）" : ""}
+  `;
+}
+
 /** フォーム送信後の一時メッセージ表示 */
 function flashStatus(el, text) {
   el.textContent = text;

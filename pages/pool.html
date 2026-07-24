@@ -113,6 +113,11 @@
         <label for="note">特記事項</label>
         <textarea id="note" placeholder="気づいた点・改善提案など"></textarea>
       </div>
+      <div class="field">
+        <label>写真添付（任意・最大3枚／自動で圧縮されます）</label>
+        <input type="file" accept="image/*" multiple id="photo-input">
+        <div class="photo-preview" id="photo-preview"></div>
+      </div>
       <div class="form-actions">
         <button type="submit" class="btn-primary">💾 記録を保存</button>
         <button type="button" class="btn-ghost" id="print-btn">🖨 この記録を印刷</button>
@@ -126,15 +131,16 @@
         <caption>この端末に保存されているプール水検査の記録</caption>
         <thead>
           <tr>
-            <th>検査日</th><th>学校名</th><th>担当</th><th class="num">残留塩素</th><th class="num">pH</th><th>濁度</th><th>判定</th><th>特記事項</th><th></th>
+            <th>検査日</th><th>学校名</th><th>担当</th><th class="num">残留塩素</th><th class="num">pH</th><th>濁度</th><th>判定</th><th>特記事項</th><th>写真</th><th></th>
           </tr>
         </thead>
         <tbody id="records-body"></tbody>
       </table>
       <p class="empty-note" id="empty-note" style="display:none;">まだ記録がありません。上のフォームから入力してください。</p>
     </div>
-    <div class="form-actions" style="border-top:none;">
+    <div class="form-actions" style="border-top:none;flex-wrap:wrap;justify-content:space-between;">
       <button type="button" id="csv-btn">⬇ CSVで書き出す</button>
+      <div class="storage-meter" id="storage-meter"></div>
     </div>
 
   </main>
@@ -149,10 +155,12 @@
 <script src="../js/app.js"></script>
 <script src="../js/storage.js"></script>
 <script src="../js/csv.js"></script>
+<script src="../js/photo.js"></script>
 <script>
 const TYPE = "pool";
 const form = document.getElementById("pool-form");
 const statusEl = document.getElementById("status");
+const photoManager = createPhotoManager("photo-input", "photo-preview", 3);
 
 function judge(data){
   const chlorineOK = data.chlorine >= 0.4;
@@ -175,10 +183,12 @@ form.addEventListener("submit", (e) => {
     turbidity: document.getElementById("turbidity").value,
     place: document.getElementById("place").value,
     note: document.getElementById("note").value,
+    photos: photoManager.getPhotos(),
   };
   data.pass = judge(data);
   Storage.saveRecord(TYPE, data);
   form.reset();
+  photoManager.reset();
   flashStatus(statusEl, "保存しました");
   renderTable();
 });
@@ -212,6 +222,7 @@ function renderTable(){
       <td>${r.turbidity || ""}</td>
       <td>${badgeHTML(r.pass)}</td>
       <td>${r.note || ""}</td>
+      <td>${(r.photos || []).map((p) => `<img class="table-thumb" src="${p}" data-src="${p}">`).join("")}</td>
       <td><button class="row-del" title="削除" data-id="${r.id}">✕</button></td>
     `;
     body.appendChild(tr);
@@ -222,7 +233,9 @@ function renderTable(){
       renderTable();
     });
   });
+  renderStorageMeter("storage-meter");
 }
+enablePhotoLightbox(document.getElementById("records-body"));
 renderTable();
 </script>
 </body>
