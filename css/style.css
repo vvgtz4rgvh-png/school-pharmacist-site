@@ -385,6 +385,7 @@ table.records th, table.records td{
   text-align:left;
   white-space:nowrap;
 }
+table.records.wrap th, table.records.wrap td{ white-space: normal; vertical-align: top; }
 table.records th{
   background: var(--paper-deep);
   font-weight:700;
@@ -402,6 +403,10 @@ table.records td.num{ font-family: var(--font-mono); text-align:right; }
 }
 .badge.pass{ background: var(--green-pale); color: var(--green-deep); }
 .badge.fail{ background: var(--stamp-pale); color: var(--stamp); }
+.badge.cat-env{ background: var(--green-pale); color: var(--green-deep); }
+.badge.cat-committee{ background: #e8e4f5; color: #4a3a7a; }
+.badge.cat-edu{ background: var(--stamp-pale); color: var(--stamp); }
+.badge.cat-admin{ background: var(--paper-deep); color: var(--ink-soft); }
 .row-del{ background:transparent; border:none; color:var(--ink-soft); cursor:pointer; font-size:.9rem; padding:2px 6px; }
 .row-del:hover{ color: var(--stamp); }
 .empty-note{ color: var(--ink-soft); font-size:.86rem; padding: 14px 0; }
