@@ -43,75 +43,71 @@
     <h2 class="section-title">年間スケジュール（イメージ）</h2>
     <p style="color:var(--ink-soft);font-size:.92rem;margin-top:-6px;">以下は、あくまでイメージです。各校の実情や行事などに応じて、養護教諭・担当職員と相談して計画してください。</p>
     <div class="table-wrap">
-      <table class="records wrap" id="year-plan-table">
+      <table class="year-grid">
         <thead>
-          <tr><th>時期</th><th>内容</th><th>区分</th></tr>
+          <tr>
+            <th class="term-1">4月</th>
+            <th class="term-1">5月</th>
+            <th class="term-1">6月</th>
+            <th class="term-1">7月</th>
+            <th class="term-break">8月<br><span class="term-sub">夏季休業</span></th>
+            <th class="term-2">9月</th>
+            <th class="term-2">10月</th>
+            <th class="term-2">11月</th>
+            <th class="term-2">12月</th>
+            <th class="term-3">1月</th>
+            <th class="term-3">2月</th>
+            <th class="term-3">3月</th>
+          </tr>
         </thead>
         <tbody>
           <tr>
-            <td>4月</td>
-            <td>
-              <div>学校訪問・環境衛生検査計画の確認</div>
-              <div style="color:var(--ink-soft);font-size:.82rem;margin-top:2px;white-space:normal;">年間の検査計画、設備の状況を確認します。</div>
-            </td>
-            <td><span class="badge cat-admin">事務</span></td>
-          </tr>
-
-          <tr>
-            <td rowspan="5">5月〜7月</td>
-            <td>
-              <div>プール前検査・プール水質検査①②</div>
-              <div style="color:var(--ink-soft);font-size:.82rem;margin-top:2px;white-space:normal;">プール開き前の設備点検と、プール使用期間中の水質検査を行います。</div>
-            </td>
-            <td><span class="badge cat-env">環境衛生</span></td>
-          </tr>
-          <tr><td>飲料水検査①</td><td><span class="badge cat-env">環境衛生</span></td></tr>
-          <tr><td>排水・薬品管理</td><td><span class="badge cat-env">環境衛生</span></td></tr>
-          <tr>
-            <td>
-              <div>教室環境検査（空気・照度・騒音・ダニ）</div>
-              <div style="color:var(--ink-soft);font-size:.82rem;margin-top:2px;white-space:normal;">高温多湿になる時期の教室環境を確認します。</div>
-            </td>
-            <td><span class="badge cat-env">環境衛生</span></td>
-          </tr>
-          <tr>
-            <td>
-              <div>給食室衛生検査</div>
-              <div style="color:var(--ink-soft);font-size:.82rem;margin-top:2px;white-space:normal;">食中毒が多発する時期の給食室の衛生管理を確認します。</div>
-            </td>
-            <td><span class="badge cat-env">環境衛生</span></td>
-          </tr>
-
-          <tr>
-            <td rowspan="3">7月</td>
-            <td>ホルムアルデヒド検査</td>
-            <td><span class="badge cat-env">環境衛生</span></td>
-          </tr>
-          <tr><td>学校保健委員会①</td><td><span class="badge cat-committee">委員会</span></td></tr>
-          <tr><td>全国学校保健調査</td><td><span class="badge cat-admin">調査</span></td></tr>
-
-          <tr>
-            <td rowspan="4">12月〜翌2月</td>
-            <td>
-              <div>教室環境検査（空気・照度・騒音・黒板）</div>
-              <div style="color:var(--ink-soft);font-size:.82rem;margin-top:2px;white-space:normal;">暖房使用期の換気・CO₂濃度を中心に確認します。</div>
-            </td>
-            <td><span class="badge cat-env">環境衛生</span></td>
-          </tr>
-          <tr><td>学校保健委員会②</td><td><span class="badge cat-committee">委員会</span></td></tr>
-          <tr><td>飲料水検査②</td><td><span class="badge cat-env">環境衛生</span></td></tr>
-          <tr><td>薬物乱用防止教室</td><td><span class="badge cat-edu">教育</span></td></tr>
-
-          <tr>
-            <td>3月</td>
-            <td>
-              <div>年度まとめ・次年度計画</div>
-              <div style="color:var(--ink-soft);font-size:.82rem;margin-top:2px;white-space:normal;">1年間の記録を振り返り、次年度の検査計画を立てます。</div>
-            </td>
-            <td><span class="badge cat-admin">事務</span></td>
+            <td><ul>
+              <li><span class="dot cat-admin"></span>学校訪問・環境衛生検査計画の確認</li>
+            </ul></td>
+            <td><ul>
+              <li><span class="dot cat-env"></span>プール前検査（設備点検）</li>
+              <li><span class="dot cat-env"></span>プール水質検査①</li>
+            </ul></td>
+            <td><ul>
+              <li><span class="dot cat-env"></span>飲料水検査①</li>
+              <li><span class="dot cat-env"></span>排水・薬品管理</li>
+              <li><span class="dot cat-env"></span>教室環境検査（ダニ）</li>
+            </ul></td>
+            <td><ul>
+              <li><span class="dot cat-env"></span>プール水質検査②</li>
+              <li><span class="dot cat-env"></span>教室環境検査（空気・照度・騒音）</li>
+              <li><span class="dot cat-env"></span>給食室衛生検査</li>
+              <li><span class="dot cat-env"></span>ホルムアルデヒド検査</li>
+              <li><span class="dot cat-committee"></span>学校保健委員会①</li>
+              <li><span class="dot cat-admin"></span>全国学校保健調査</li>
+            </ul></td>
+            <td><p class="term-note">検査業務は原則なし</p></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><ul>
+              <li><span class="dot cat-env"></span>教室環境検査（空気・照度・騒音・黒板）</li>
+              <li><span class="dot cat-committee"></span>学校保健委員会②</li>
+            </ul></td>
+            <td><ul>
+              <li><span class="dot cat-env"></span>飲料水検査②</li>
+            </ul></td>
+            <td><ul>
+              <li><span class="dot cat-edu"></span>薬物乱用防止教室</li>
+            </ul></td>
+            <td><ul>
+              <li><span class="dot cat-admin"></span>年度まとめ・次年度計画</li>
+            </ul></td>
           </tr>
         </tbody>
       </table>
+    </div>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;font-size:.78rem;color:var(--ink-soft);">
+      <span><span class="dot cat-env"></span>環境衛生検査</span>
+      <span><span class="dot cat-committee"></span>委員会</span>
+      <span><span class="dot cat-edu"></span>教育</span>
+      <span><span class="dot cat-admin"></span>事務・調査</span>
     </div>
 
     <h2 class="section-title">検査項目別の頻度早見表</h2>
