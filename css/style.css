@@ -475,6 +475,10 @@ table.records td.num{ font-family: var(--font-mono); text-align:right; }
   position:absolute; left:0;
   color: var(--gold);
 }
+.tl-item ul.tl-sublist li b{
+  color: var(--ink);
+  font-weight: 700;
+}
 
 /* ==========================================================================
    保健だより / Q&A
